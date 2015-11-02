@@ -136,8 +136,8 @@ public class demo {
         		}
         	}
         
-        driver.close();
-        System.exit(0);
+        	driver.close();
+        	System.exit(0);
            
     	}
  
