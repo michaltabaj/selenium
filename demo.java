@@ -49,8 +49,8 @@ public class demo {
         else{
         	// There are some products found, so add all of them to comparison
         	for (WebElement e : searchResult) {
-                e.click();
-            }
+                	e.click();
+            	}
         	
         	// STEP 5 - Go to comparison page
         	System.out.println("INFO: STEP 5 -> Going to comparison page");
@@ -91,22 +91,22 @@ public class demo {
         	// Check if there is anything left in the comparison
         	if (removed == searchResult.size()){
         		// There's nothing to be added to shopping cart, so we end this TC
-            	System.out.println("ERROR: There are no products available for adding to the shopping cart, please refine your search!");
+            		System.out.println("ERROR: There are no products available for adding to the shopping cart, please refine your search!");
         	}
         	else{
         		// STEP 7 - Adding random available product to shopping cart
-            	System.out.println("INFO: STEP 7 -> Adding random available product to shopping cart");
-				Random generator = new Random(); 
-				int random = generator.nextInt(searchResult.size()-removed) + 2;
-				System.out.println("INFO: Adding the product to shopping cart from random column: "+random);
-				// Store the price for random product
-				String expectedPricePath = "//table/tbody[1]/tr[3]/td["+random+"]";
-				WebElement expectedPrice = driver.findElement(By.xpath(expectedPricePath));
-				String expectedPriceValue = expectedPrice.getText();
-				System.out.println("INFO: Expected price for random product is: "+expectedPriceValue);
-				// As the location of Add to Cart button may differ as it depends on product's specification (can be e.g. in tbody[2] or tbody[4]), 
+            		System.out.println("INFO: STEP 7 -> Adding random available product to shopping cart");
+			Random generator = new Random(); 
+			int random = generator.nextInt(searchResult.size()-removed) + 2;
+			System.out.println("INFO: Adding the product to shopping cart from random column: "+random);
+			// Store the price for random product
+			String expectedPricePath = "//table/tbody[1]/tr[3]/td["+random+"]";
+			WebElement expectedPrice = driver.findElement(By.xpath(expectedPricePath));
+			String expectedPriceValue = expectedPrice.getText();
+			System.out.println("INFO: Expected price for random product is: "+expectedPriceValue);
+			// As the location of Add to Cart button may differ as it depends on product's specification (can be e.g. in tbody[2] or tbody[4]), 
         		// let's search for product ID in the 1st row of table
-				String randomProductIdPath = "//table/tbody[1]/tr[1]/td["+random+"]/a";
+			String randomProductIdPath = "//table/tbody[1]/tr[1]/td["+random+"]/a";
         		WebElement randomProductId = driver.findElement(By.xpath(randomProductIdPath));
         		// Product ID is always right after the string "product_id" in href attribute
         		int randomIdPosition = randomProductId.getAttribute("href").indexOf("product_id");
@@ -122,11 +122,10 @@ public class demo {
         		WebElement cartLink = driver.findElement(By.cssSelector("a[title=\"Shopping Cart\"]"));
         		cartLink.click();
         		// Verify the total price
-				String totalPricePath = "//table/tbody/tr/td[6]";
-				WebElement totalPrice = driver.findElement(By.xpath(totalPricePath));
-				String totalPriceValue = totalPrice.getText();
-				System.out.println("INFO: Total price for product in the shopping cart is: "+totalPriceValue);
-        		
+			String totalPricePath = "//table/tbody/tr/td[6]";
+			WebElement totalPrice = driver.findElement(By.xpath(totalPricePath));
+			String totalPriceValue = totalPrice.getText();
+			System.out.println("INFO: Total price for product in the shopping cart is: "+totalPriceValue);
         		if(expectedPriceValue.equals(totalPriceValue)){
         			System.out.println("RESULT: TEST PASSED -> Price from comparison page and total price in shopping cart are the same.");
         		}
